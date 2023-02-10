@@ -1,0 +1,11 @@
+{{#if loggedIn}}
+  {{#each blog as |blog|}}
+  {{blog.id}}
+  {{blog.blog_title}}
+  {{blog.post_date}}
+  {{blog.description}}
+  {{/each}}
+
+  {{else}}
+  <p>Please log in</p>
+{{/if}}
