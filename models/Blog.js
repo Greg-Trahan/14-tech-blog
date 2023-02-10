@@ -1,5 +1,3 @@
-// Here is where we set up our Dish model, for when we are ready to connect to a database in future activities.
-
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
@@ -21,12 +19,24 @@ Blog.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    post_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "bish",
+    modelName: "blog",
   }
 );
 
