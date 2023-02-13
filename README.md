@@ -5,7 +5,7 @@ Due: 12FEB2023
 
 Click [here](https://github.com/Greg-Trahan/14-tech-blog) to see my GitHub Repo.
 
-Click [here](https://github.com/Greg-Trahan/12-employee-database) to see my final project on Heroku.
+Click [here](https://gregs-tech-blog.herokuapp.com/) to see my final project on Heroku.
 
 ## Description
 
