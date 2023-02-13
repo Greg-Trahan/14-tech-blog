@@ -1,15 +1,22 @@
-  <nav>
-    <a href="/">Home</a> 
-    {{#if loggedIn}}
-
-  <a href="/logout">Logout</a>
-    {{else}}
+<nav>
+  <a href="/">Home</a> 
+  {{#if loggedIn}}
+    <a href="/logout">Logout</a>
+  {{else}}
     <a href="/login">Login</a>
-    {{/if}}
-  </nav>
+  {{/if}}
+</nav>
 
-{{#if loggedIn}}
-<p>You are logged in dash</p>
-{{else}}
-<h2>Please log in dash</h2>
-{{/if}}
+{{!-- {{#if loggedIn}} --}}
+  <h2>Welcome to your dashboard {{blog.user.name}} !</h2>
+  {{#each blogs as |blog|}}
+  <a href = "/blog/{{blog.id}}">
+    <p>{{blog.blog_title}}</p>
+  </a>
+  <p>{{blog.post_date}}</p>
+  <p>{{blog.user.name}}</p>
+{{/each}}
+  
+{{!-- {{else}}
+  <h2>Please log in</h2>
+{{/if}} --}}

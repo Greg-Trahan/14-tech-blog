@@ -1,21 +1,21 @@
-  <nav>
-    <a href="/">Home</a>
-    <!-- If the user is logged in, show a logout button -->    
-    {{#if loggedIn}}
-  <a href="/dashboard">Dashboard</a>
-  <a href="/logout">Logout</a>
-    {{else}}
-    <!-- Otherwise, show a link to login -->
-    <a href="/login">Login</a>
-    {{/if}}
-  </nav>
-
-{{#if loggedIn}}
-  {{blog.id}}
-  {{blog.blog_title}}
-  {{blog.post_date}}
-  {{blog.description}}
-  <p>blogs in</p>
+<nav>
+  <a href="/">Home</a>
+  {{#if loggedIn}}
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Logout</a>
   {{else}}
-  <p>Please log in blogs out</p>
-{{/if}}
+    <a href="/login">Login</a>
+  {{/if}}
+</nav>
+
+<body>
+  <div>
+    {{#if loggedIn}}
+      <p>{{blog.blog_title}}</p>
+      <p>Posted {{blog.post_date}}</p>
+      <p>{{blog.description}}</p>
+    {{else}}
+      <p>Please log to view {{blog.blog_title}}</p>
+    {{/if}}
+  </div>
+</body>
