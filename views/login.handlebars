@@ -1,3 +1,11 @@
+<nav>
+  <a href="/">Home</a>
+  <!-- If the user is logged in, show a logout button -->    
+  {{#if loggedIn}}
+  <a href="/dashboard">Dashboard</a>
+  {{/if}}
+</nav>
+
 <div class="row justify-space-between-md">
   <div class="login-card">
     <h2 class="page-title">Login</h2>

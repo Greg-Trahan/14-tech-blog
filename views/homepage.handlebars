@@ -1,8 +1,11 @@
-{{!-- 
-WHEN I visit the site for the first time
-
-THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in --}}
-
+  <nav> 
+    {{#if loggedIn}}
+  <a href="/dashboard">Dashboard</a>
+  <a href="/logout">Logout</a>
+    {{else}}
+    <a href="/login">Login</a>
+    {{/if}}
+  </nav>
 <h2>Recent Blog Posts</h2>
 {{#each blogs as |blog|}}
 <a href = "/blog/{{blog.id}}">

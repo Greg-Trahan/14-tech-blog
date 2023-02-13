@@ -8,14 +8,11 @@ router.get("/", async (req, res) => {
       include: [{ model: User, attributes: ["name"] }],
     });
 
-    // id: req.body.id,
-    // blog_title: req.body.blog_title,
-    // description: req.body.description,
-    // post_date: req.body.post_date,
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
     res.render("homepage", {
       blogs,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err.message);
@@ -24,16 +21,20 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/login", async (req, res) => {
-  res.render("login");
+  res.render("login", { loggedIn: req.session.loggedIn });
 });
 
 router.get("/dashboard", async (req, res) => {
-  res.render("dashboard");
+  res.render("dashboard", { loggedIn: req.session.loggedIn });
 });
 
 router.get("/blog/:id", async (req, res) => {
   const blogData = await Blog.findByPk(req.params.id);
-  res.render("blogs", { blog: blogData });
+  res.render("blogs", { loggedIn: req.session.loggedIn, blog: blogData });
+});
+
+router.get("/logout", async (req, res) => {
+  res.render("logout");
 });
 
 module.exports = router;

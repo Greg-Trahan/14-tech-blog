@@ -1,0 +1,18 @@
+<nav>
+  <a href="/">Home</a>   
+  {{#if loggedIn}}
+  <a href="/dashboard">Dashboard</a>
+  {{else}}
+  <a href="/login">Login</a>
+  {{/if}}
+</nav>
+
+<div>
+  {{#if loggedIn}}
+  <p>Click here to log out logout</p>
+  <button class="btn btn-primary" id="logout">logout</button>
+  {{else}}
+  <p>You have been logged out logout</p>
+  {{/if}}
+
+</div>
