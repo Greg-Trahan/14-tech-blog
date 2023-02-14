@@ -1,3 +1,13 @@
+const Handlebars = require("handlebars");
+
+Handlebars.registerHelper("equal", function (a, b, options) {
+  if (a === b) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
+
 const comment = async (event) => {
   event.preventDefault();
 
@@ -18,7 +28,8 @@ const comment = async (event) => {
   }
 };
 
-const editComment = async () => {
+const editComment = async (event) => {
+  console.log(event.target);
   const response = await fetch("/api/blog/:id", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -26,7 +37,9 @@ const editComment = async () => {
   document.location.replace("/:id");
 };
 
-const deleteComment = async () => {
+const deleteComment = async (event) => {
+  console.log(event.target);
+  console.log(event.target.data.id);
   const response = await fetch("/api/blog/:id", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },

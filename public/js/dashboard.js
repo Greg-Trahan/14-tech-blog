@@ -25,7 +25,8 @@ const postNewBlog = async (event) => {
   }
 };
 
-const editBlog = async () => {
+const editBlog = async (event) => {
+  console.log(event.target);
   const response = await fetch("/api/blog/:id", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -34,7 +35,9 @@ const editBlog = async () => {
   console.log("Hello!");
 };
 
-const deleteBlog = async () => {
+const deleteBlog = async (event) => {
+  console.log(event.target);
+  console.log(event.target.getAttribute("data-id"));
   const response = await fetch("/api/blog/:id", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },

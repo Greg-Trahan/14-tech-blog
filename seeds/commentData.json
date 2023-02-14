@@ -4,27 +4,31 @@
     "content":
       "Great!.",
     "post_date": "June 21, 2021 17:00:00",
-    "blog_id": 1
+    "blog_id": 1,
+    "user_id": 1
   },
   {
     "name": "Sal",
     "content":
       "I would write that.",
     "post_date": "September 22, 2021 22:00:00",
-    "blog_id": 2
+    "blog_id": 2,
+    "user_id": 1
   },
   {
     "name": "Lernantino",
     "content":
       "Some people just want to watch Netflix.",
     "post_date": "December 21, 2021 20:30:00",
-    "blog_id": 1
+    "blog_id": 1,
+    "user_id": 2
   },
   {
     "name": "Amiko",
     "content":
       "I eat batteries for breakfast",
     "post_date": "March 19, 2021 19:00:00",
-    "blog_id": 3
+    "blog_id": 3,
+    "user_id": 3
   }
 ]

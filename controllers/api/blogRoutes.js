@@ -1,31 +1,46 @@
 const router = require("express").Router();
-const Blog = require("../../models/Blog");
-const User = require("../../models/User");
-const Comment = require("../../models/Comment");
+const { User, Blog, Comment } = require("../../models");
 const auth = require("../../utils/auth");
 
 router.get("/:id", auth, async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id);
-    console.log(blogData);
-
-    const commentData = await Comment.findAll({
-      where: { blog_id: blogData.id },
-      include: [{ model: User, attributes: ["name"] }],
-    });
-
-    console.log(commentData);
 
     if (!blogData) {
       res.status(404).json({ message: "No blog with this id" });
       return;
     }
-    const blogs = blogData.get({ plain: true });
-    const comments = commentData.get({ plain: true });
 
-    res.render("blogs", { loggedIn: req.session.loggedIn, blogs, comments });
+    const blogs = blogData.get({ plain: true });
+
+    const commentData = await Comment.findAll({
+      where: { blog_id: blogData.id },
+      // include: [{ model: User, attributes: ["name"] }],
+    });
+
+    const commentMap = commentData.map((comment) =>
+      comment.get({ plain: true })
+    );
+
+    const commentUser = await Promise.all(
+      commentMap.map(async (comment) => {
+        const user = await User.findByPk(comment.user_id);
+        const plainUser = user.get({ plain: true });
+        const newComment = { ...comment, name: plainUser.name };
+        // console.log(newComment);
+        return newComment;
+      })
+    );
+
+    //New comment is what I want
+    console.log({ commentUser });
+
+    res.render("blogs", {
+      loggedIn: req.session.loggedIn,
+      blogs,
+      commentUser,
+    });
   } catch (err) {
-    console.log("You done messed up");
     res.status(500).json(err);
   }
 });

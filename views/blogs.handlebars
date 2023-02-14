@@ -24,19 +24,19 @@
       </div>
     </form>
 
-    {{#each comments as |comment|}}
+    {{#each commentUser as |comment|}}
       <p>{{comment.content}}</p>
       <p>{{comment.post_date}}</p>
       <p>{{comment.name}}</p>
       <p>{{blog.user.name}}</p>
-      {{#if comment.name === blog.user.name}}
+      {{#if (equal comment.name blog.user.name)}}
         <div class="form-group">
           <button class="btn btn-primary" type="submit" id="edit-comment-btn">Edit Comment</button>
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit" id="delete-comment-btn">Delete Comment</button>
         </div>
-        {{/if}}
+      {{/if}}
     {{/each}}
   </div>
 </body>
