@@ -10,39 +10,34 @@
 
 <body>
   <div>
-    {{#if loggedIn}}
-      <p>{{blog.blog_title}}</p>
-      <p>Posted {{blog.post_date}}</p>
-      <p>{{blog.description}}</p>
-      
-      <form class = form-comment>
+    <p>{{blog.blog_title}}</p>
+    <p>Posted {{blog.post_date}}</p>
+    <p>{{blog.description}}</p>
+    
+    <form class = form-comment>
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <input class="comment-input" type="text" id="comment-text"/>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit" id="comment-btn">Add Comment</button>
+      </div>
+    </form>
+
+    {{#each comments as |comment|}}
+      <p>{{comment.content}}</p>
+      <p>{{comment.post_date}}</p>
+      <p>{{comment.name}}</p>
+      <p>{{blog.user.name}}</p>
+      {{#if comment.name === blog.user.name}}
         <div class="form-group">
-          <label for="comment">Comment:</label>
-          <input class="comment-input" type="text" id="comment-text"/>
+          <button class="btn btn-primary" type="submit" id="edit-comment-btn">Edit Comment</button>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" type="submit" id="comment-btn">Add Comment</button>
+          <button class="btn btn-primary" type="submit" id="delete-comment-btn">Delete Comment</button>
         </div>
-      </form>
-
-       {{#each comment as |comments|}}
-        <p>{{comment.content}}</p>
-        <p>{{comment.post_date}}</p>
-        <p>{{comment.name}}</p>
-        {{!-- {{#if comment was made by current user}} --}}
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit" id="delete-comment-btn">Delete Comment</button>
-          </div>
-          {{!-- {{/if}} --}}
-
-      {{/each}}
-
-
-
-
-    {{else}}
-      <p>Please log to view {{blog.blog_title}}</p>
-    {{/if}}
+        {{/if}}
+    {{/each}}
   </div>
 </body>
 

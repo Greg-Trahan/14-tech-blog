@@ -7,22 +7,39 @@
   {{/if}}
 </nav>
 
-{{#if loggedIn}}
-  <h2>Welcome to your dashboard  !</h2>
+<h2>Welcome to your dashboard {{name}}!</h2>
+
+<div class="blog-card">
+  <form class="form blog-form">
+    <div class="form-group">
+      <label for="blog-title">Blog Title:</label>
+      <input class="form-input" type="text" id="blog-title" />
+    </div>
+    <div class="form-group">
+      <label for="blog-content">Blog Content:</label>
+      <input class="form-input" type="text" id="blog-content" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Post Blog</button>
+    </div>
+  </form>
+</div>
+
+</div>
   {{#each blogs as |blog|}}
-
-  <a href = "/api/blog/{{blog.id}}">
-    <p>{{blog.blog_title}}</p>
-  </a>
-  <p>{{blog.post_date}}</p>
-  <p>{{blog.user.name}}</p>
-{{/each}}
-  
-{{else}}
-  <h2>Please log in</h2>
-{{/if}}
-
-
+    <a href = "/api/blog/{{blog.id}}">
+      <p>{{blog.blog_title}}</p>
+    </a>
+    <p>{{blog.post_date}}</p>
+    <p>{{blog.user.name}}</p>
+    <div class="button-group">
+      <button class="btn btn-primary" id="edit-blog-btn">Edit Blog</button>
+    </div>
+    <div class="button-group">
+      <button class="btn btn-primary" id="delete-blog-btn">Delete Blog</button>
+  </div>
+  {{/each}}
+</div>
 
 
 {{!-- WHEN I click on the dashboard option in the navigation
