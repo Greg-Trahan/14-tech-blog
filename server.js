@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars");
 
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
-const helpers = require("./utils/helpers");
+const auth = require("./utils/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,13 +14,13 @@ const PORT = process.env.PORT || 3001;
 const sess = {
   secret: "Super secret secret",
   resave: false,
-  // cookie: { maxAge: 10000 },
+  // cookie: { maxAge: 1000000 },
   saveUninitialized: false,
 };
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ auth });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");

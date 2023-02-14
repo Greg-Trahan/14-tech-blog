@@ -4,12 +4,18 @@ const Blog = require("../../models/Blog");
 router.get("/:id", async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id);
+    const commentData = await Comment.findAll({
+      where: { blog_id: blogData.id },
+      include: [{ model: User, attributes: ["name"] }],
+    });
+
     if (!blogData) {
       res.status(404).json({ message: "No blog with this id" });
       return;
     }
     const blogs = blogData.get({ plain: true });
-    res.render("blogs", { loggedIn: req.session.loggedIn, blogs });
+    const comments = commentData.get({ plain: true });
+    res.render("blogs", { loggedIn: req.session.loggedIn, blogs, comments });
   } catch (err) {
     res.status(500).json(err);
   }

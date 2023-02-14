@@ -7,6 +7,7 @@ router.post("/signup", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.user_id = data.id;
+      req.session.name = data.name;
       res.status(200).json(data);
     });
   } catch (err) {
@@ -26,6 +27,7 @@ router.post("/login", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.user_id = user.id;
+      req.session.name = user.name;
       res.status(200).json(user);
     });
   } catch (err) {

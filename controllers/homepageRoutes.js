@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Blog } = require("../models");
+const auth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -23,18 +24,14 @@ router.get("/login", async (req, res) => {
   res.render("login", { loggedIn: req.session.loggedIn });
 });
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", auth, async (req, res) => {
   try {
     const blogData = await Blog.findAll({
-      where: Blog.user_id === req.session.user_id,
+      where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["name"] }],
     });
-    console.log(blogData);
-    console.log(req.session.user_id);
 
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
-
-    console.log(req.session);
 
     res.render("dashboard", { blogs, loggedIn: req.session.loggedIn });
   } catch (err) {
