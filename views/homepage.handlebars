@@ -9,7 +9,7 @@
 
 <h2>Recent Blog Posts</h2>
 {{#each blogs as |blog|}}
-  <a href = "/blog/{{blog.id}}">
+  <a href = "/api/blog/{{blog.id}}">
     <p>{{blog.blog_title}}</p>
   </a>
   <p>{{blog.post_date}}</p>

@@ -7,19 +7,20 @@
   {{/if}}
 </nav>
 
-{{!-- {{#if loggedIn}} --}}
-  <h2>Welcome to your dashboard {{blog.user.name}} !</h2>
+{{#if loggedIn}}
+  <h2>Welcome to your dashboard  !</h2>
   {{#each blogs as |blog|}}
-  <a href = "/blog/{{blog.id}}">
+
+  <a href = "/api/blog/{{blog.id}}">
     <p>{{blog.blog_title}}</p>
   </a>
   <p>{{blog.post_date}}</p>
   <p>{{blog.user.name}}</p>
 {{/each}}
   
-{{!-- {{else}}
+{{else}}
   <h2>Please log in</h2>
-{{/if}} --}}
+{{/if}}
 
 
 
