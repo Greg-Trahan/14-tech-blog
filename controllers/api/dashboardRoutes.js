@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     await Blog.update(
-      { traveler_name: req.body.traveler_name },
+      { blog_title: req.body.blog_title, description: req.body.description },
       {
         where: {
           id: req.params.id,
