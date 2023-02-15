@@ -15,7 +15,6 @@ router.get("/:id", auth, async (req, res) => {
 
     const commentData = await Comment.findAll({
       where: { blog_id: blogData.id },
-      // include: [{ model: User, attributes: ["name"] }],
     });
 
     const commentMap = commentData.map((comment) =>

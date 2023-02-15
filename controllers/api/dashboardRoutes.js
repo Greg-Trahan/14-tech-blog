@@ -1,17 +1,23 @@
 const router = require("express").Router();
-const Blog = require("../../models");
+const { User, Blog, Comment } = require("../../models");
 
 router.post("/", async (req, res) => {
   try {
-    const data = await Blog.create(req.body);
+    const data = await Blog.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
     res.status(200).json(data);
   } catch (err) {
+    console.log(err);
+    console.log(err.message);
     res.status(400).json(err);
   }
 });
 
 router.put("/:id", async (req, res) => {
   try {
+    console.log("hello");
     await Blog.update(
       { blog_title: req.body.blog_title, description: req.body.description },
       {

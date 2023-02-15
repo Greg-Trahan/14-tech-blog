@@ -32,11 +32,12 @@
     </a>
     <p>{{blog.post_date}}</p>
     <p>{{blog.user.name}}</p>
+    <p>{{blog.content}}
     <div class="button-group">
-      <button class="btn btn-primary" id="edit-blog-btn">Edit Blog</button>
+      <button class="btn btn-primary edit-blog-btn" id="edit-blog-btn" data-id="{{blog.id}}">Edit Blog</button>
     </div>
     <div class="button-group">
-      <button class="btn btn-primary" id="delete-blog-btn">Delete Blog</button>
+      <button class="btn btn-primary delete-blog-btn" id="delete-blog-btn" data-id="{{blog.id}}">Delete Blog</button>
   </div>
   {{/each}}
 </div>
