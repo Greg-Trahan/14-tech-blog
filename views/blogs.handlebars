@@ -10,9 +10,9 @@
 
 <body>
   <div>
-    <p>{{blog.blog_title}}</p>
-    <p>Posted {{blog.post_date}}</p>
-    <p>{{blog.description}}</p>
+    <p>{{blogs.blog_title}}</p>
+    <p>Posted {{blogs.post_date}}</p>
+    <p>{{blogs.description}}</p>
     
     <form class = form-comment>
       <div class="form-group">
@@ -28,8 +28,7 @@
       <p>{{comment.content}}</p>
       <p>{{comment.post_date}}</p>
       <p>{{comment.name}}</p>
-      <p>{{blog.user.name}}</p>
-      {{#if (equal comment.name blog.user.name)}}
+      {{#if comment.authoredByUser }}
         <div class="form-group">
           <button class="btn btn-primary" type="submit" id="edit-comment-btn">Edit Comment</button>
         </div>
@@ -41,7 +40,7 @@
   </div>
 </body>
 
-<script src="../../js/comment.js"></script>
+<script src="/js/comment.js"></script>
 
 {{!-- 
 WHEN I click on an existing blog post

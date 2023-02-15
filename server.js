@@ -7,6 +7,8 @@ const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const auth = require("./utils/auth");
+// const helpers = require("./utils/helpers");
+var helpers = require("handlebars-helpers");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,7 +22,9 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ auth });
+const hbs = exphbs.create({
+  helpers: { compare: helpers.comparison().compare },
+});
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");

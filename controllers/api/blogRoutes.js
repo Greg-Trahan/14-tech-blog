@@ -26,13 +26,15 @@ router.get("/:id", auth, async (req, res) => {
       commentMap.map(async (comment) => {
         const user = await User.findByPk(comment.user_id);
         const plainUser = user.get({ plain: true });
-        const newComment = { ...comment, name: plainUser.name };
-        // console.log(newComment);
+        const newComment = {
+          ...comment,
+          name: plainUser.name,
+          authoredByUser: comment.name === req.session.name,
+        };
         return newComment;
       })
     );
 
-    //New comment is what I want
     console.log({ commentUser });
 
     res.render("blogs", {
