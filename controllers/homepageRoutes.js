@@ -26,16 +26,18 @@ router.get("/login", async (req, res) => {
 
 router.get("/dashboard", auth, async (req, res) => {
   try {
+    let blogs = [];
+    console.log(User);
     const blogData = await Blog.findAll({
       where: { user_id: req.session.user_id },
       include: [{ model: User, attributes: ["name"] }],
     });
 
-    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+    if (blogData !== 0) {
+      blogs = blogData.map((blog) => blog.get({ plain: true }));
+    }
 
-    const name = blogs[0].user.name;
-
-    res.render("dashboard", { blogs, name, loggedIn: req.session.loggedIn });
+    res.render("dashboard", { blogs, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err.message);
     res.status(500).json(err);
