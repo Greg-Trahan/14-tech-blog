@@ -39,6 +39,8 @@ router.get("/:id", auth, async (req, res) => {
     res.render("blogs", {
       loggedIn: req.session.loggedIn,
       blogs,
+      // currentUser: req.session.name,
+      // user_id: req.sesssion.user_id,
       commentUser,
     });
   } catch (err) {
@@ -48,7 +50,11 @@ router.get("/:id", auth, async (req, res) => {
 
 router.post("/:id", async (req, res) => {
   try {
-    const data = await Comment.create(req.body);
+    const data = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+      // blog_id:
+    });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);
@@ -57,7 +63,14 @@ router.post("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const data = await Comment.update(req.body);
+    const data = await Comment.update(
+      { content: req.body.content },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    );
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);
@@ -66,7 +79,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const data = await Comment.destroy(req.body);
+    const data = await Comment.destroy({ where: { id: req.body.id } });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);

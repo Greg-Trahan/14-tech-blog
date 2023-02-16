@@ -1,6 +1,5 @@
 const postNewBlog = async (event) => {
   event.preventDefault();
-  console.log(event);
 
   const title = document.querySelector("#blog-title").value.trim();
   const content = document.querySelector("#blog-content").value.trim();
@@ -24,10 +23,6 @@ const editBlog = async (event) => {
   const title = document.querySelector("#blog-title").value.trim();
   const content = document.querySelector("#blog-content").value.trim();
 
-  console.log(title);
-  console.log(content);
-  console.log(event.target.getAttribute("data-id"));
-
   const response = await fetch(
     `/api/dashboard/${event.target.getAttribute("data-id")}`,
     {
@@ -42,8 +37,6 @@ const editBlog = async (event) => {
 };
 
 const deleteBlog = async (event) => {
-  console.log(event.target);
-  console.log(event.target.getAttribute("data-id"));
   const response = await fetch(
     `/api/dashboard/${event.target.getAttribute("data-id")}`,
     {

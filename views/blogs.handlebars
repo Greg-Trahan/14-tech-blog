@@ -20,7 +20,7 @@
         <input class="comment-input" type="text" id="comment-text"/>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" type="submit" id="comment-btn">Add Comment</button>
+        <button class="btn btn-primary" type="submit" id="comment-btn" blog-id="{{blog.blog_id}}" user-id="{{user_id}}" name-id="{{req.session.name}}">Add Comment</button>
       </div>
     </form>
 
@@ -30,10 +30,10 @@
       <p>{{comment.name}}</p>
       {{#if comment.authoredByUser }}
         <div class="form-group">
-          <button class="btn btn-primary" type="submit" id="edit-comment-btn">Edit Comment</button>
+          <button class="btn btn-primary edit-comment-btn" type="submit" id="edit-comment-btn" blog-id="{{comment.blog_id}}" comment-id="{{comment.id}}" name-id="{{comment.name}}">Edit Comment</button>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" type="submit" id="delete-comment-btn">Delete Comment</button>
+          <button class="btn btn-primary delete-comment-btn" type="submit" id="delete-comment-btn" blog-id="{{comment.blog_id}}" comment-id="{{comment.id}}" name-id="{{comment.name}}">Delete Comment</button>
         </div>
       {{/if}}
     {{/each}}
