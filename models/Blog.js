@@ -19,10 +19,10 @@ Blog.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    post_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
+    // post_date: {
+    //   type: DataTypes.DATE,
+    //   allowNull: true,
+    // },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

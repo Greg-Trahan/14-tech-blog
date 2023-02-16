@@ -19,10 +19,10 @@ Comment.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    post_date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
+    // post_date: {
+    //   type: DataTypes.DATE,
+    //   allowNull: true,
+    // },
     blog_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -36,7 +36,6 @@ Comment.init(
       allowNull: false,
       references: {
         model: "user",
-        key: "id",
       },
     },
   },

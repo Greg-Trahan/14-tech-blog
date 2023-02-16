@@ -5,6 +5,11 @@ const comment = async (event) => {
   const comment = document.querySelector("#comment-text").value.trim();
 
   if (comment) {
+    console.log(
+      `event.target.getAttribute("blog-id") ${event.target.getAttribute(
+        "blog-id"
+      )}`
+    );
     const response = await fetch(
       `/api/blog/${event.target.getAttribute("blog-id")}`,
       {
@@ -34,7 +39,10 @@ const editComment = async (event) => {
     `/api/blog/${event.target.getAttribute("blog-id")}`,
     {
       method: "PUT",
-      body: JSON.stringify({ content: comment }),
+      body: JSON.stringify({
+        comment_id: event.target.getAttribute("comment-id"),
+        content: comment,
+      }),
       headers: { "Content-Type": "application/json" },
     }
   );
@@ -43,11 +51,14 @@ const editComment = async (event) => {
   );
 };
 
-const deleteComment = async () => {
+const deleteComment = async (event) => {
   const response = await fetch(
     `/api/blog/${event.target.getAttribute("blog-id")}`,
     {
       method: "DELETE",
+      body: JSON.stringify({
+        comment_id: event.target.getAttribute("comment-id"),
+      }),
       headers: { "Content-Type": "application/json" },
     }
   );

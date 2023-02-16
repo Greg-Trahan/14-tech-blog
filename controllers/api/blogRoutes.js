@@ -34,30 +34,35 @@ router.get("/:id", auth, async (req, res) => {
       })
     );
 
-    console.log({ commentUser });
+    // console.log({ commentUser });
+    console.log({ blogs });
 
     res.render("blogs", {
       loggedIn: req.session.loggedIn,
       blogs,
-      // currentUser: req.session.name,
-      // user_id: req.sesssion.user_id,
+      currentUser: req.session.name,
+      // user_id: req.session.user_id,
       commentUser,
     });
   } catch (err) {
     res.status(500).json(err);
+    console.log(err.message);
   }
 });
 
 router.post("/:id", async (req, res) => {
   try {
     const data = await Comment.create({
-      ...req.body,
+      // ...req.body,
+      content: req.body.content,
       user_id: req.session.user_id,
-      // blog_id:
+      blog_id: req.body.blog_id,
+      name: req.session.name,
     });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);
+    console.log(err.message);
   }
 });
 
@@ -67,7 +72,7 @@ router.put("/:id", async (req, res) => {
       { content: req.body.content },
       {
         where: {
-          id: req.body.id,
+          id: req.body.comment_id,
         },
       }
     );
@@ -79,10 +84,11 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const data = await Comment.destroy({ where: { id: req.body.id } });
+    const data = await Comment.destroy({ where: { id: req.body.comment_id } });
     res.status(200).json(data);
   } catch (err) {
     res.status(400).json(err);
+    console.log(err.message);
   }
 });
 
