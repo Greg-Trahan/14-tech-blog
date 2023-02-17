@@ -41,7 +41,7 @@ router.get("/:id", auth, async (req, res) => {
       loggedIn: req.session.loggedIn,
       blogs,
       currentUser: req.session.name,
-      user_id: req.session.user_id,
+      // user_id: req.session.user_id,
       commentUser,
     });
   } catch (err) {
